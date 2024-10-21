@@ -24,8 +24,6 @@ enum class UserScreen {
 
 @Composable
 fun UserApp(navController: NavHostController = rememberNavController()) {
-    val viewModel = UserViewModel()
-    viewModel.userState.collectAsState()
     NavHost(
         navController = navController,
         startDestination = UserScreen.UserList.name,
@@ -40,13 +38,11 @@ fun UserApp(navController: NavHostController = rememberNavController()) {
             "${UserScreen.UserDetails.name}/{userId}/{name}/{address}",
             arguments = listOf(navArgument("userId") {
                 type = NavType.StringType
-            },
-                navArgument("name") {
-                    type = NavType.StringType
-                },
-                navArgument("address") {
-                    type = NavType.StringType
-                })
+            }, navArgument("name") {
+                type = NavType.StringType
+            }, navArgument("address") {
+                type = NavType.StringType
+            })
         ) { backStackEntry ->
             val userId = backStackEntry.arguments?.getString("userId")
             val name = backStackEntry.arguments?.getString("name")
